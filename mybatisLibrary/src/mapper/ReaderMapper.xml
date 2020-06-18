@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="dao.IReaderDAO">
+	<select id="get" parameterType="int" resultType="vo.Reader">
+		select * from reader where readerID = #{readerID}
+	</select>
+ 	<update id="update" parameterType="String" >
+        update reader
+        <set>
+            <if test="readerName != null">readerName=#{readerName},</if>
+            <if test="readerPassword != null">readerPassword=#{readerPassword},</if>
+        </set>
+        where readerID=#{readerID}
+	</update>
+ 	<delete id="delete" parameterType="int">
+		delete from
+		reader 
+		where readerID=#{readerID}
+	</delete>
+	<insert id="add" parameterType="vo.Reader">
+		insert into reader
+		values(#{readerID},#{readerName},#{readerPassword})
+	</insert>
+
+	
+ 
+ </mapper>
+
+ 

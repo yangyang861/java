@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="dao.IReadrecordDAO">
+	<select id="query" parameterType="vo.ReadRecord" resultType="vo.ReadRecord">
+		select *
+		from readrecord
+		<where>
+			<if test="serialNumber!=0">
+				and serialNumber = #{serialNumber}
+			</if>
+			<if test="bookID!=null">
+				and bookID = #{bookID}
+			</if>
+			<if test="bookName!=null">
+				and bookName = #{bookName}
+			</if>
+			<if test="readerID!=0">
+				and readerID = #{readerID}
+			</if>
+			<if test="readerName!=null">
+				and readerName = #{readerName}
+			</if>
+			<if test="borrowTime!=null">
+				and borrowTime = #{borrowTime}
+			</if>
+			<if test="backTime!=null">
+				and backTime = #{backTime}
+			</if>
+		
+		</where>
+	</select>
+ 	<update id="back" parameterType="vo.ReadRecord">
+        update readrecord
+        <set>
+              backTime=#{backTime},
+        </set>
+        where serialNumber=#{serialNumber}
+	</update>
+ 
+	<insert id="add" parameterType="vo.ReadRecord">
+		insert into readrecord(serialNumber,bookID,bookName,readerID,readerName,borrowTime,backTime)
+		values(#{serialNumber},#{bookID},#{bookName},#{readerID},#{readerName},#{borrowTime},#{backTime})
+	</insert>
+	<select id="count" parameterType="vo.ReadRecord" resultType="int">
+		select count(*)
+		from readrecord
+		<where>
+
+			<if test="bookID!=null">
+				 bookID like #{bookID}
+			</if>
+			<if test="bookName!=null">
+				 bookName like #{bookName}
+			</if>
+			<if test="readerID!=0">
+				 readerID like #{readerID}
+			</if>
+			<if test="readerName!=null">
+				 readerName like #{readerName}
+			</if>
+		
+		</where>
+	</select>
+ </mapper>
+
+ 

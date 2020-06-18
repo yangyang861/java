@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="dao.IBookDAO">
+	<select id="query" parameterType="String" resultType="vo.Book" flushCache="true">
+		select * from book where bookName = #{bookName}
+	</select>
+	<select id="query2" parameterType="String" resultType="vo.Book">
+		select * from book where bookID = #{bookID}
+	</select>
+	<update id="update" parameterType="vo.Book">
+	        update book
+	        <set>
+	            <if test="bookName != null">bookName=#{bookName},</if>
+	        </set>
+	        where bookID=#{bookID}
+		</update>
+	 	<delete id="delete" parameterType="String">
+			delete from
+			book 
+			where bookID=#{bookID}
+		</delete>
+		<insert id="add" parameterType="vo.Book">
+			insert into book
+			values(#{bookID},#{bookName},#{addTime})
+		</insert>
+
+	
+ 
+ </mapper>
+
+ 
